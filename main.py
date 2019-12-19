@@ -34,7 +34,7 @@ if __name__=='__main__':
 
     # 多进程读取csv文件 并入库 oracle
     po = Pool(5)  # 最大的进程数为5
-    csvFileList = getCsvFileList(r'./xml/', '.csv')
+    csvFileList = getCsvFileList(xmlDir, '.csv')
     for csvFile in csvFileList:
         # inOracle(csvFile)
         po.apply_async(inOracle, args=(csvFile,), callback=callback)
