@@ -2,9 +2,9 @@
 # @Time       : 2019/12/18 11:18
 # @Author     : SMnRa
 # @Email      : smnra@163.com
-# @File       : toCsvMP.py
+# @File       : toCsvMrsMP.py
 # @Software   : PyCharm
-# @description: 本脚本的作用为  保存为csv文件 多进程
+# @description: 本脚本的作用为  MRS保存为csv文件 多进程
 
 
 
