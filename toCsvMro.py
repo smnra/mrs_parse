@@ -88,8 +88,8 @@ if __name__ == '__main__':
 
     for xmlFile in xmlFileList:
         '''每次循环将会用空闲出来的子进程去调用目标'''
-        po.apply_async(toCSV, args=(xmlFile,),callback=callback)
-        # toCSV(xmlFile)
+        # po.apply_async(toCSV, args=(xmlFile,),callback=callback)
+        toCSV(xmlFile)
 
     print("----start----")
     po.close()  # 关闭进程池，关闭后po不再接受新的请求
