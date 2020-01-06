@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
-# @Time       : 2020/1/2 14:33
+# @Time       : 2020/1/6 15:33
 # @Author     : SMnRa
 # @Email      : smnra@163.com
-# @File       : toCsvMro.py
+# @File       : toCsvMre.py
 # @Software   : PyCharm
-# @description: 本脚本的作用为 MRO保存为csv文件
+# @description: 本脚本的作用为  MRE文件解析
 
 
 
 
-
-
-from mroXmlRead import *
+from mreXmlRead import *
 from unzipDir import *
 import time
 
@@ -52,23 +50,6 @@ def toCSV(xmlFile):
             print("导出CSV文件完成:", os.path.split(xmlFile)[1], mrData[0])
 
 
-
-            for rip in result['rip']:   # 处理 result['rip']
-                csvRip = []
-                ripData = list(rip.items())[0]
-                for mdata in ripData[1]:
-                    # 拼接insert 语句
-                    mroRipStrPart2 = "'" + mdata[0] + "', "
-                    mroRipStrPart3 = ', '.join(mdata[1:])
-                    mroRipStr = mroStrPart1 + mroRipStrPart2 + mroRipStrPart3 + '\n'
-                    csvRip.append(mroRipStr.replace("NIL", ""))
-
-                with open(r'./xml/{}.csv'.format(ripData[0]), 'a+', encoding=('utf-8')) as f:  # 保存本页内容到文件
-                    f.writelines(csvRip)
-                    print(r'./xml/{}.csv'.format(ripData[0]))
-
-            print("导出CSV文件完成:", os.path.split(xmlFile)[1], ripData[0])
-
     print("xml文件导出完成:",str(time.time() - start))
     return str(time.time() - start)
 
@@ -80,7 +61,7 @@ def callback(x):
 
 
 if __name__ == '__main__':
-    xmlDir = './xml/mro/'
+    xmlDir = './xml/mre/'
     # xml压缩包文件夹
     xmlFileList = unzipDir(xmlDir, '.gz')
 
@@ -97,7 +78,10 @@ if __name__ == '__main__':
     '''如果没有添加join()，会导致有的代码没有运行就已经结束了'''
     print("-----end-----")
 
+
+
 """
+
 create table MRO_15MI as
 (
 	enbId VARCHAR2(32),
@@ -110,66 +94,25 @@ create table MRO_15MI as
 	MmeGroupId NUMBER,
 	MmeCode NUMBER,
 	TimeStamp2 VARCHAR2(32),
-	MR.LteScRSRP NUMBER,
-	MR.LteNcRSRP NUMBER,
-	MR.LteScRSRQ NUMBER,
-	MR.LteNcRSRQ NUMBER,
-	MR.LteScTadv NUMBER,
-	MR.LteScPHR NUMBER,
-	MR.LteScAOA NUMBER,
-	MR.LteScPlrULQci1 NUMBER,
-	MR.LteScPlrULQci2 NUMBER,
-	MR.LteScPlrULQci3 NUMBER,
-	MR.LteScPlrULQci4 NUMBER,
-	MR.LteScPlrULQci5 NUMBER,
-	MR.LteScPlrULQci6 NUMBER,
-	MR.LteScPlrULQci7 NUMBER,
-	MR.LteScPlrULQci8 NUMBER,
-	MR.LteScPlrULQci9 NUMBER,
-	MR.LteScPlrDLQci1 NUMBER,
-	MR.LteScPlrDLQci2 NUMBER, 
-	MR.LteScPlrDLQci3 NUMBER, 
-	MR.LteScPlrDLQci4 NUMBER, 
-	MR.LteScPlrDLQci5 NUMBER, 
-	MR.LteScPlrDLQci6 NUMBER, 
-	MR.LteScPlrDLQci7 NUMBER, 
-	MR.LteScPlrDLQci8 NUMBER, 
-	MR.LteScPlrDLQci9 NUMBER,
-	MR.LteScSinrUL NUMBER,
-	MR.LteScEarfcn NUMBER, 
-	MR.LteScPci NUMBER,
-	MR.LteSccgi NUMBER,
+	EventType VARCHAR2(8),
+	MR.LteScRSRP  NUMBER,
+	MR.LteScRSRQ  NUMBER,
+	MR.LteScEarfcn  NUMBER,
+	MR.LteScPci  NUMBER,
+	MR.LteScCgi    VARCHAR2(32),
+	MR.LteNcRSRP  NUMBER,
+	MR.LteNcRSRQ  NUMBER,
 	MR.LteNcEarfcn NUMBER,
-	MR.LteNcPci NUMBER, 
-	MR.GsmNcellBcch NUMBER, 
-	MR.GsmNcellCarrierRSSI NUMBER, 
-	MR.GsmNcellNcc NUMBER, 
-	MR.GsmNcellBcc NUMBER, 
-	MR.UtraCpichRSCP NUMBER, 
-	MR.UtraCpichEcNo NUMBER, 
-	MR.UtraCellParameterId NUMBER, 
-	MR.Longitude NUMBER, 
-	MR.Latitude NUMBER
+	MR.LteNcPci  NUMBER,
+	MR.GsmNcellBcch  NUMBER,
+	MR.GsmNcellCarrierRSSI  NUMBER,
+	MR.GsmNcellNcc  NUMBER,
+	MR.GsmNcellBcc  NUMBER,
+	MR.UtraCpichRSCP  NUMBER,
+	MR.UtraCarrierRSSI  NUMBER,
+	MR.UtraCpichEcNo  NUMBER,
+	MR.UtraCellParameterId NUMBER
 )
 
-
-
-
-
-
-create table MRO_RIP_15MI as
-(
-	enbId VARCHAR2(32),
-	startTime VARCHAR2(32),
-	endTime VARCHAR2(32),
-	reportTime VARCHAR2(32),
-	period NUMBER,
-	eci VARCHAR2(32),
-	MmeUeS1apId  NUMBER,
-	MmeGroupId NUMBER,
-	MmeCode NUMBER,
-	TimeStamp2 VARCHAR2(32),
-	MR.LteScRIP NUMBER
-)
 
 """

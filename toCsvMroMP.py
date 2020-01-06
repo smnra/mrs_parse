@@ -98,3 +98,82 @@ if __name__ == '__main__':
     '''如果没有添加join()，会导致有的代码没有运行就已经结束了'''
     print("-----end-----")
 
+
+
+
+"""
+create table MRO_15MI as
+(
+	enbId VARCHAR2(32),
+	startTime VARCHAR2(32),
+	endTime VARCHAR2(32),
+	reportTime VARCHAR2(32),
+	period NUMBER,
+	eci VARCHAR2(32),
+	MmeUeS1apId  NUMBER,
+	MmeGroupId NUMBER,
+	MmeCode NUMBER,
+	TimeStamp2 VARCHAR2(32),
+	MR.LteScRSRP NUMBER,
+	MR.LteNcRSRP NUMBER,
+	MR.LteScRSRQ NUMBER,
+	MR.LteNcRSRQ NUMBER,
+	MR.LteScTadv NUMBER,
+	MR.LteScPHR NUMBER,
+	MR.LteScAOA NUMBER,
+	MR.LteScPlrULQci1 NUMBER,
+	MR.LteScPlrULQci2 NUMBER,
+	MR.LteScPlrULQci3 NUMBER,
+	MR.LteScPlrULQci4 NUMBER,
+	MR.LteScPlrULQci5 NUMBER,
+	MR.LteScPlrULQci6 NUMBER,
+	MR.LteScPlrULQci7 NUMBER,
+	MR.LteScPlrULQci8 NUMBER,
+	MR.LteScPlrULQci9 NUMBER,
+	MR.LteScPlrDLQci1 NUMBER,
+	MR.LteScPlrDLQci2 NUMBER, 
+	MR.LteScPlrDLQci3 NUMBER, 
+	MR.LteScPlrDLQci4 NUMBER, 
+	MR.LteScPlrDLQci5 NUMBER, 
+	MR.LteScPlrDLQci6 NUMBER, 
+	MR.LteScPlrDLQci7 NUMBER, 
+	MR.LteScPlrDLQci8 NUMBER, 
+	MR.LteScPlrDLQci9 NUMBER,
+	MR.LteScSinrUL NUMBER,
+	MR.LteScEarfcn NUMBER, 
+	MR.LteScPci NUMBER,
+	MR.LteSccgi NUMBER,
+	MR.LteNcEarfcn NUMBER,
+	MR.LteNcPci NUMBER, 
+	MR.GsmNcellBcch NUMBER, 
+	MR.GsmNcellCarrierRSSI NUMBER, 
+	MR.GsmNcellNcc NUMBER, 
+	MR.GsmNcellBcc NUMBER, 
+	MR.UtraCpichRSCP NUMBER, 
+	MR.UtraCpichEcNo NUMBER, 
+	MR.UtraCellParameterId NUMBER, 
+	MR.Longitude NUMBER, 
+	MR.Latitude NUMBER
+)
+ 
+ 
+ 
+ 
+ 
+ 
+create table MRO_RIP_15MI as
+(
+	enbId VARCHAR2(32),
+	startTime VARCHAR2(32),
+	endTime VARCHAR2(32),
+	reportTime VARCHAR2(32),
+	period NUMBER,
+	eci VARCHAR2(32),
+	MmeUeS1apId  NUMBER,
+	MmeGroupId NUMBER,
+	MmeCode NUMBER,
+	TimeStamp2 VARCHAR2(32),
+	MR.LteScRIP NUMBER
+)
+
+"""
