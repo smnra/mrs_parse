@@ -34,9 +34,9 @@ def readXML(xmlFileName):
 
         # fileHeader标签内容提取
         fileHeaderTag = root.find("fileHeader")    #查找 fileHeader 标签, 返回值为 标签属性节点的 字典
-        xmlDict['startTime'] = fileHeaderTag.get('startTime','')
-        xmlDict['endTime'] = fileHeaderTag.get('endTime','')
-        xmlDict['reportTime'] = fileHeaderTag.get('reportTime','')
+        xmlDict['startTime'] = fileHeaderTag.get('startTime','').replace("T"," ")
+        xmlDict['endTime'] = fileHeaderTag.get('endTime','').replace("T"," ")
+        xmlDict['reportTime'] = fileHeaderTag.get('reportTime','').replace("T"," ")
         xmlDict['period'] = fileHeaderTag.get('period','')
 
         # eNB 标签内容提取
@@ -70,7 +70,7 @@ def measurementTagToStr(measurementTag):
             mmeUeS1apId = objectTag.get('MmeUeS1apId', '')
             mmeGroupId = objectTag.get('MmeGroupId', '')
             mmeCode = objectTag.get('MmeCode', '')
-            timeStamp = objectTag.get('TimeStamp', '')
+            timeStamp = objectTag.get('TimeStamp', '').replace("T"," ")
             eventType = objectTag.get('EventType', '')
 
             # 获取ECI MmeUeS1apId  MmeGroupId  MmeCode  TimeStamp EventType . (xpath  /measurement/object/@id )
