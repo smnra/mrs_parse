@@ -14,7 +14,7 @@ from mrsXmlRead import *
 from unzipDir import *
 
 
-xmlDir = './xml/'
+xmlDir = './xml/mrs/'
 # xml压缩包文件夹
 
 

@@ -32,21 +32,23 @@ def readXML(xmlFileName):
 
         # fileHeader标签内容提取
         fileHeaderTag = root.find("fileHeader")    #查找 fileHeader 标签, 返回值为 标签属性节点的 字典
-        xmlDict['startTime'] = fileHeaderTag.get('startTime','').replace("T"," ")
-        xmlDict['endTime'] = fileHeaderTag.get('endTime','').replace("T"," ")
-        xmlDict['reportTime'] = fileHeaderTag.get('reportTime','').replace("T"," ")
-        xmlDict['period'] = fileHeaderTag.get('period','').replace("T"," ")
+        xmlDict['startTime'] = fileHeaderTag.get('startTime','').replace("T"," ").split(".")[0]
+        xmlDict['endTime'] = fileHeaderTag.get('endTime','').replace("T"," ").split(".")[0]
+        xmlDict['reportTime'] = fileHeaderTag.get('reportTime','').replace("T"," ").split(".")[0]
+        xmlDict['period'] = fileHeaderTag.get('period','')
 
         # eNB 标签内容提取
         enbTag = root.find("eNB")
         xmlDict['enbId'] = enbTag.get('id','')
 
         # measurement 标签提取
-        if enbTag :
+        if enbTag and len(xmlDict['startTime'])==19:
             measurementTagList = enbTag.findall("measurement")
             xmlDict['mr'].append(measurementTagToStr(measurementTagList[0]))
             xmlDict['rip'].append(measurementRipTagToStr(measurementTagList[1]))
             # print(xmlDict)
+        else:
+            print("异常数据:{}!".format(xmlFileName))
 
         print("解析完成:{}".format(xmlFileName))
 
@@ -69,7 +71,7 @@ def measurementTagToStr(measurementTag):
             mmeUeS1apId = objectTag.get('MmeUeS1apId', '')
             mmeGroupId = objectTag.get('MmeGroupId', '')
             mmeCode = objectTag.get('MmeCode', '')
-            timeStamp = objectTag.get('TimeStamp', '').replace("T"," ")
+            timeStamp = "'" + objectTag.get('TimeStamp', '').replace("T"," ").split(".")[0] + "'"
 
             # 获取ECI MmeUeS1apId  MmeGroupId  MmeCode  TimeStamp . (xpath  /measurement/object/@id )
 
@@ -93,7 +95,7 @@ def measurementRipTagToStr(measurementTag):
             mmeUeS1apId = objectTag.get('MmeUeS1apId', '')
             mmeGroupId = objectTag.get('MmeGroupId', '')
             mmeCode = objectTag.get('MmeCode', '')
-            timeStamp = objectTag.get('TimeStamp', '').replace("T"," ")
+            timeStamp = "'" + objectTag.get('TimeStamp', '').replace("T"," ").split(".")[0] +"'"
 
             # 获取ECI MmeUeS1apId  MmeGroupId  MmeCode  TimeStamp . (xpath  /measurement/object/@id )
 

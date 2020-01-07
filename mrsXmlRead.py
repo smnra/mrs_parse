@@ -26,9 +26,9 @@ def readXML(xmlFileName):
 
         # fileHeader标签内容提取
         fileHeaderTag = root.find("fileHeader")    #查找 fileHeader 标签, 返回值为 标签属性节点的 字典
-        xmlDict['startTime'] = fileHeaderTag.get('startTime','').replace("T"," ")
-        xmlDict['endTime'] = fileHeaderTag.get('endTime','').replace("T"," ")
-        xmlDict['reportTime'] = fileHeaderTag.get('reportTime','').replace("T"," ")
+        xmlDict['startTime'] = fileHeaderTag.get('startTime','').replace("T"," ").split(".")[0]
+        xmlDict['endTime'] = fileHeaderTag.get('endTime','').replace("T"," ").split(".")[0]
+        xmlDict['reportTime'] = fileHeaderTag.get('reportTime','').replace("T"," ").split(".")[0]
         xmlDict['period'] = fileHeaderTag.get('period','')
 
         # eNB 标签内容提取
@@ -36,11 +36,14 @@ def readXML(xmlFileName):
         xmlDict['enbId'] = enbTag.get('id','')
 
         # measurement 标签提取
-        if enbTag :
+        if enbTag and len(xmlDict['startTime'])==19:
             measurementTagList = enbTag.findall("measurement")
             for measurementTag in measurementTagList:
                 xmlDict['mr'].append(measurementTagToStr(measurementTag))
                 # print(xmlDict)
+        else:
+            print("异常数据:{}!".format(xmlFileName))
+
         print("解析完成:{}".format(xmlFileName))
 
     else:
@@ -81,5 +84,5 @@ def removeEndSpace(str,chr):
 
 
 if __name__ == "__main__":
-    result = readXML('./xml/FDD-LTE_MRS_NSN_OMC_767223_20191206024500.xml')
+    result = readXML('./xml/mrs/FDD-LTE_MRS_NSN_OMC_767223_20191206024500.xml')
     print(result)

@@ -54,7 +54,7 @@ def callback(x):
 
 
 if __name__ == '__main__':
-    xmlDir = './xml/'
+    xmlDir = './xml/mrs/'
     # xml压缩包文件夹
     xmlFileList = unzipDir(xmlDir, '.gz')
 
