@@ -34,7 +34,7 @@ def toCSV(xmlFile):
                 for mdata in mrData[1]:
                     # 拼接insert 语句
                     insertSqlPart2 = "'" + mdata[0] + "', "
-                    insertSqlPart3 = ', '.join(mdata[1:])
+                    insertSqlPart3 = ','.join(mdata[1:])
 
                     csv.append(insertSqlPart1 + insertSqlPart2 + insertSqlPart3 + '\n')
 
@@ -54,9 +54,9 @@ def callback(x):
 
 
 if __name__ == '__main__':
-    xmlDir = './xml/mrs/'
+    xmlDir = './xml/'
     # xml压缩包文件夹
-    xmlFileList = unzipDir(xmlDir, '.gz')
+    xmlFileList = unzipDir(xmlDir,'MRS', '.gz')
 
     po = Pool(5)  # 最大的进程数为3
 

@@ -26,11 +26,11 @@ def toCSV(xmlFile):
         result = readXML(xmlFile)
 
         if len(result.get('mr','')) > 0:
-            mroStrPart1 = "'" + result.get('enbId','') + "', " + "'" +\
-                             result.get('startTime','') + "', " + "'" + \
-                             result.get('endTime','') + "', " + "'" + \
-                             result.get('reportTime','') + "', " + \
-                             result.get('period',0) + ', '
+            mroStrPart1 = "'" + result.get('enbId','') + "'," + "'" +\
+                             result.get('startTime','') + "'," + "'" + \
+                             result.get('endTime','') + "'," + "'" + \
+                             result.get('reportTime','') + "'," + \
+                             result.get('period',0) + ','
 
 
             for mr in result['mr']:   # 处理 result['mr']
@@ -38,8 +38,8 @@ def toCSV(xmlFile):
                 mrData =  list(mr.items())[0]
                 for mdata in mrData[1]:
                     # 拼接insert 语句
-                    mroStrPart2 = "'" + mdata[0] + "', "
-                    mroStrPart3 = ', '.join(mdata[1:])
+                    mroStrPart2 = "'" + mdata[0] + "',"
+                    mroStrPart3 = ','.join(mdata[1:])
                     mroStr = mroStrPart1 + mroStrPart2 + mroStrPart3 + '\n'
                     csv.append(mroStr.replace("NIL",""))
 
@@ -61,9 +61,9 @@ def callback(x):
 
 
 if __name__ == '__main__':
-    xmlDir = './xml/mre/'
+    xmlDir = './xml/'
     # xml压缩包文件夹
-    xmlFileList = unzipDir(xmlDir, '.gz')
+    xmlFileList = unzipDir(xmlDir, 'MRE', '.gz')
 
     po = Pool(5)  # 最大的进程数为3
 

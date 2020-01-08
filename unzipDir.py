@@ -12,7 +12,7 @@ import gzip
 
 
 
-def unzipDir(path,extName):
+def unzipDir(path,*subStrList):
     # 目录中的压缩文件解压,第一个参数为文件夹 路径,  第二个参数是 文件过滤字符串, 解压文件名中包含extName 的 文件
     dirPath = os.path.abspath(path)
     xmlFileList = []
@@ -38,10 +38,17 @@ def unzipDir(path,extName):
         for gzFile in os.listdir(dirPath):
             gzFileAbsPath = os.path.join(dirPath,gzFile)
             xmlFileAbsPath = gzFileAbsPath.replace('.gz','')
-            if os.path.isfile(gzFileAbsPath) and extName in gzFile:
+            if os.path.isfile(gzFileAbsPath) and fixSubName(subStrList, gzFile):
                 xmlFileList.append(unzipGzFile(gzFileAbsPath,xmlFileAbsPath))
+
+
 
     return xmlFileList
 
+def fixSubName(subStrList, Str):
+    for subStr in subStrList:
+        if subStr not in Str: return False
+    return True
+
 if __name__ == '__main__':
-    unzipDir('./xml/','.gz')
+    unzipDir('./xml/','.gz','MRE')
