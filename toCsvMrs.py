@@ -13,13 +13,8 @@ from mrsXmlRead import *
 from unzipDir import *
 
 
-xmlDir = './xml/'
-# xml压缩包文件夹
 
-
-xmlFileList = unzipDir(xmlDir,'MRS','.gz')
-for xmlFile in xmlFileList:
-    valueCount = 0     # 插入数据条数的计数器  超过500条 commit
+def toCSV(xmlFile):
     if os.path.isfile(xmlFile):
         result = readXML(xmlFile)
 
@@ -39,4 +34,19 @@ for xmlFile in xmlFileList:
                     f.writelines(csv)
                     print(r'./xml/{}.csv'.format(mrData[0]))
 
+
+
+
+
+if __name__ == '__main__':
+    xmlDir = './xml/'
+    # xml压缩包文件夹
+    xmlFileList = unzipDir(xmlDir, 'MRS', '.gz')
+
+
+    for xmlFile in xmlFileList:
+        '''每次循环将会用空闲出来的子进程去调用目标'''
+        toCSV(xmlFile)
+
+    print("-----end-----")
 
